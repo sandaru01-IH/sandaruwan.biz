@@ -1,83 +1,185 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { PROFILE } from '@/data/profile';
+
+const roles = ['Urban Informatics', 'GIS Developer', 'Data Analyst', 'Creative Technologist'];
+
+function WordReveal({
+  text,
+  delay = 0,
+  className = '',
+}: {
+  text: string;
+  delay?: number;
+  className?: string;
+}) {
+  const words = text.split(' ');
+  return (
+    <span className={className}>
+      {words.map((word, i) => (
+        <span key={i} className="inline-block overflow-hidden leading-none" style={{ marginRight: '0.22em' }}>
+          <motion.span
+            className="inline-block"
+            initial={{ y: '110%' }}
+            animate={{ y: '0%' }}
+            transition={{ delay: delay + i * 0.09, duration: 0.95, ease: [0.33, 1, 0.68, 1] }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </span>
+  );
+}
 
 export default function Hero() {
-  const scrollToAbout = () => {
-    const element = document.querySelector('#about');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '18%']);
+  const fadeOut = useTransform(scrollYProgress, [0, 0.65], [1, 0]);
+
+  useEffect(() => { setReady(true); }, []);
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="home" className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <img
-          src="/images/me.jpeg"
-          alt="Sandaruwan Sankalpa Silva"
-          className="absolute inset-0 w-full h-full object-cover object-center"
+    <section id="hero" ref={containerRef} className="relative h-screen w-full overflow-hidden bg-black">
+      {/* Parallax background */}
+      <motion.div style={{ y: bgY }} className="absolute inset-0 will-change-transform">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(/images/me.jpeg)' }}
         />
-        <div className="absolute inset-0 bg-black/60" />
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/65 via-black/50 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50" />
+      </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex items-center justify-center">
-        <div className="container-custom text-center px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="mb-8"
+      {/* Main content */}
+      <motion.div
+        style={{ y: contentY, opacity: fadeOut }}
+        className="relative z-10 h-full flex flex-col justify-center px-6 md:px-12 lg:px-20 will-change-transform"
+      >
+        <div className="max-w-5xl">
+          {ready && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 1.2 }}
+              className="label-text mb-10 md:mb-14"
+            >
+              Urban Informatics &amp; Planning — University of Moratuwa
+            </motion.p>
+          )}
+
+          <h1
+            className="font-poppins font-black text-white leading-none tracking-tight mb-6"
+            style={{ fontSize: 'clamp(2.75rem, 9.5vw, 7.5rem)' }}
           >
-            <img
-              src="/images/img.png"
-              alt="Profile"
-              className="mx-auto rounded-full border-4 border-white/20 object-cover w-32 h-32 md:w-48 md:h-48 lg:w-56 lg:h-56"
+            {ready && (
+              <>
+                <WordReveal text="Sandaruwan" delay={0.35} className="block" />
+                <WordReveal text="Sankalpa" delay={0.55} className="block text-white/65" />
+                <WordReveal text="Silva" delay={0.72} className="block" />
+              </>
+            )}
+          </h1>
+
+          {ready && (
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ delay: 1.15, duration: 1.1, ease: [0.33, 1, 0.68, 1] }}
+              className="h-px bg-white/18 max-w-sm origin-left mb-8"
             />
-          </motion.div>
+          )}
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8, ease: 'easeOut' }}
-            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-3 md:mb-4 text-white px-2"
-          >
-            Sandaruwan
-            <br />
-            <span className="text-white/90">Sankalpa Silva</span>
-          </motion.h1>
+          {ready && (
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.35, duration: 0.9 }}
+              className="text-white/70 font-light leading-relaxed max-w-lg mb-10 md:mb-14"
+              style={{ fontSize: 'clamp(0.95rem, 1.8vw, 1.3rem)' }}
+            >
+              {PROFILE.headline}
+            </motion.p>
+          )}
 
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-display font-light mb-4 md:mb-6 text-white/80 tracking-wide uppercase px-2"
-          >
-            GIS Developer & Data Analyst
-          </motion.h2>
+          {ready && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.6, duration: 0.8 }}
+              className="flex flex-wrap gap-x-4 gap-y-2 mb-12 md:mb-16"
+            >
+              {roles.map((role, i) => (
+                <span key={role} className="flex items-center gap-4">
+                  <span className="label-text">{role}</span>
+                  {i < roles.length - 1 && <span className="text-white/15 text-xs">·</span>}
+                </span>
+              ))}
+            </motion.div>
+          )}
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8, ease: 'easeOut' }}
-            className="text-sm sm:text-base md:text-lg text-white/70 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed px-4"
-          >
-            Transforming spatial data into actionable intelligence through advanced GIS technologies and data-driven methodologies
-          </motion.p>
-
-          <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8, ease: 'easeOut' }}
-            onClick={scrollToAbout}
-            className="px-6 py-2.5 md:px-8 md:py-3 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white font-medium hover:bg-white/20 hover:border-white/50 transition-all duration-300 uppercase tracking-wider text-xs md:text-sm"
-          >
-            Explore My Work
-          </motion.button>
+          {ready && (
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.85, duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <button
+                onClick={() => scrollTo('journey')}
+                className="group inline-flex items-center gap-3 px-8 py-4 border border-white/22 text-white text-xs tracking-[0.2em] uppercase font-medium transition-all duration-500 hover:bg-white hover:text-black hover:border-white"
+              >
+                Explore Journey
+                <motion.span
+                  className="inline-block"
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  →
+                </motion.span>
+              </button>
+              <button
+                onClick={() => scrollTo('contact')}
+                className="inline-flex items-center gap-3 px-8 py-4 text-white/45 text-xs tracking-[0.2em] uppercase font-medium transition-all duration-300 hover:text-white"
+              >
+                Contact Me
+              </button>
+            </motion.div>
+          )}
         </div>
-      </div>
+      </motion.div>
+
+      {/* Scroll cue */}
+      {ready && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2.4, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 pointer-events-none"
+        >
+          <span className="label-text" style={{ fontSize: '9px', letterSpacing: '0.3em' }}>SCROLL</span>
+          <motion.div
+            animate={{ scaleY: [0, 1, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.4 }}
+            className="w-px h-8 bg-white/30 origin-top"
+          />
+        </motion.div>
+      )}
     </section>
   );
 }

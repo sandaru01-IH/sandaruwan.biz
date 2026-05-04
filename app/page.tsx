@@ -1,20 +1,22 @@
-import Hero from "./components/Hero";
 import Navigation from "./components/Navigation";
-import About from "./components/About";
+import Hero from "./components/Hero";
+import Journey from "./components/Journey";
+import Philosophy from "./components/Philosophy";
 import Experience from "./components/Experience";
-import Education from "./components/Education";
-import Skills from "./components/Skills";
+import SkillsEcosystem from "./components/SkillsEcosystem";
+import Capabilities from "./components/Capabilities";
 import Contact from "./components/Contact";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-black">
       <Navigation />
       <Hero />
-      <About />
+      <Journey />
+      <Philosophy />
       <Experience />
-      <Education />
-      <Skills />
+      <SkillsEcosystem />
+      <Capabilities />
       <Contact />
     </main>
   );

@@ -9,69 +9,106 @@
   }
 
   * {
-    @apply border-gray-800;
-  }
-
-  body {
-    @apply bg-black text-white;
+    box-sizing: border-box;
   }
 
   html {
     scroll-behavior: smooth;
+    background-color: #000;
+  }
+
+  body {
+    @apply bg-black text-white antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 9998;
+  }
+
+  ::selection {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-white;
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
   }
 
   .glass {
-    @apply bg-white/5 backdrop-blur-sm border border-white/10;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .glass-strong {
-    @apply bg-white/10 backdrop-blur-md border border-white/20;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
   }
 
   .section-padding {
-    @apply py-16 md:py-24 px-4 sm:px-6 lg:px-8;
+    @apply py-24 md:py-36 px-6 md:px-12 lg:px-20;
   }
 
   .container-custom {
     @apply max-w-7xl mx-auto;
   }
+
+  .container-cinematic {
+    @apply max-w-6xl mx-auto;
+  }
+
+  .label-text {
+    @apply text-xs tracking-[0.25em] uppercase text-white/40 font-medium;
+  }
+
+  .chapter-number {
+    font-size: clamp(5rem, 15vw, 10rem);
+    font-weight: 900;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    user-select: none;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .divider {
+    @apply h-px bg-white/10 w-full;
+  }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-black;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-white/20 rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-white/30;
-}
-
-/* Minimal smooth animations */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
+  animation: fadeInUp 0.9s ease-out forwards;
 }

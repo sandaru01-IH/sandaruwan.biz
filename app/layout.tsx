@@ -2,28 +2,48 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  weight: ["300", "400", "500", "600"],
 });
 
-const poppins = Poppins({ 
+const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-poppins",
   display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Sandaruwan Sankalpa Silva | GIS Developer & Data Analyst",
-  description: "Urban Informatics & Planning professional specializing in GIS technologies, data analysis, and AI-driven urban solutions.",
-  keywords: ["GIS Developer", "Data Analyst", "Urban Informatics", "Spatial Analysis", "Data Visualization"],
+  title: "Sandaruwan Sankalpa Silva — Urban Informatics & GIS Developer",
+  description:
+    "I design intelligence between cities, data, and human decisions. Urban Informatics, GIS Developer, Data Analyst, and Creative Technologist based in Sri Lanka.",
+  keywords: [
+    "GIS Developer",
+    "Data Analyst",
+    "Urban Informatics",
+    "Spatial Analysis",
+    "Data Visualisation",
+    "ArcGIS",
+    "QGIS",
+    "Sri Lanka",
+    "Sandaruwan Silva",
+  ],
   authors: [{ name: "Sandaruwan Sankalpa Silva" }],
   openGraph: {
-    title: "Sandaruwan Sankalpa Silva | GIS Developer & Data Analyst",
-    description: "Urban Informatics & Planning professional specializing in GIS technologies and data-driven methodologies.",
+    title: "Sandaruwan Sankalpa Silva — Urban Informatics & GIS Developer",
+    description:
+      "I design intelligence between cities, data, and human decisions.",
     type: "website",
+    url: "https://sandaruwan.biz",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Sandaruwan Sankalpa Silva",
+    description:
+      "Urban Informatics · GIS Developer · Data Analyst · Creative Technologist",
   },
 };
 
@@ -34,7 +54,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${poppins.variable} font-sans antialiased bg-black text-white`}>
+      <body
+        className={`${inter.variable} ${poppins.variable} font-sans bg-black text-white`}
+      >
         {children}
       </body>
     </html>
