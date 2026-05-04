@@ -84,8 +84,8 @@ export default function Hero() {
           )}
 
           <h1
-            className="font-poppins font-black text-white leading-none tracking-tight mb-6"
-            style={{ fontSize: 'clamp(2.75rem, 9.5vw, 7.5rem)' }}
+            className="font-cinematic font-black text-white leading-none tracking-tight mb-6"
+            style={{ fontSize: 'clamp(3.5rem, 11vw, 9.5rem)', letterSpacing: '-0.01em' }}
           >
             {ready && (
               <>

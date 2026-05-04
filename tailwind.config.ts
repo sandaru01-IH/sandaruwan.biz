@@ -11,9 +11,10 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ['Inter', 'var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['Poppins', 'var(--font-poppins)', 'system-ui', 'sans-serif'],
+        display: ['Barlow Condensed', 'var(--font-barlow-condensed)', 'Poppins', 'system-ui', 'sans-serif'],
         poppins: ['Poppins', 'var(--font-poppins)', 'system-ui', 'sans-serif'],
         inter: ['Inter', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+        cinematic: ['Barlow Condensed', 'var(--font-barlow-condensed)', 'system-ui', 'sans-serif'],
       },
       colors: {
         black: '#000000',

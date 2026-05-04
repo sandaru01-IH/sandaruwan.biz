@@ -113,7 +113,7 @@ export default function Experience() {
               initial={{ y: '100%' }}
               animate={headerInView ? { y: '0%' } : { y: '100%' }}
               transition={{ duration: 1.05, ease: [0.33, 1, 0.68, 1] }}
-              className="font-poppins font-black text-white leading-none"
+              className="font-cinematic font-black text-white leading-none"
               style={{ fontSize: 'clamp(2.5rem, 7.5vw, 6rem)' }}
             >
               Experience

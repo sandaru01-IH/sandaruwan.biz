@@ -56,8 +56,8 @@ function Chapter({
             initial={{ y: '100%' }}
             animate={inView ? { y: '0%' } : { y: '100%' }}
             transition={{ delay: 0.2, duration: 0.85, ease: [0.33, 1, 0.68, 1] }}
-            className="font-poppins font-bold text-white"
-            style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)' }}
+            className="font-cinematic font-black text-white"
+            style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
           >
             {chapter.title}
           </motion.h3>
@@ -100,8 +100,8 @@ export default function Journey() {
               initial={{ y: '100%' }}
               animate={headerInView ? { y: '0%' } : { y: '100%' }}
               transition={{ duration: 1, ease: [0.33, 1, 0.68, 1] }}
-              className="font-poppins font-black text-white leading-none"
-              style={{ fontSize: 'clamp(2.5rem, 8vw, 6.5rem)' }}
+              className="font-cinematic font-black text-white leading-none"
+              style={{ fontSize: 'clamp(3rem, 10vw, 8rem)' }}
             >
               A Journey
             </motion.h2>
@@ -112,8 +112,8 @@ export default function Journey() {
               initial={{ y: '100%' }}
               animate={headerInView ? { y: '0%' } : { y: '100%' }}
               transition={{ delay: 0.1, duration: 1, ease: [0.33, 1, 0.68, 1] }}
-              className="font-poppins font-black text-white/30 leading-none"
-              style={{ fontSize: 'clamp(2.5rem, 8vw, 6.5rem)' }}
+              className="font-cinematic font-black text-white/30 leading-none"
+              style={{ fontSize: 'clamp(3rem, 10vw, 8rem)' }}
             >
               in Chapters
             </motion.h2>

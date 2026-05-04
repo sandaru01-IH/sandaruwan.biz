@@ -47,8 +47,8 @@ export default function Philosophy() {
                   initial={{ y: '100%' }}
                   animate={quoteInView ? { y: '0%' } : { y: '100%' }}
                   transition={{ delay: 0.15 + i * 0.12, duration: 1, ease: [0.33, 1, 0.68, 1] }}
-                  className="font-poppins font-semibold text-white leading-snug"
-                  style={{ fontSize: 'clamp(1.4rem, 3.5vw, 2.75rem)' }}
+                  className="font-cinematic font-black text-white leading-snug"
+                  style={{ fontSize: 'clamp(1.6rem, 4vw, 3.2rem)' }}
                 >
                   {sentence.trim()}.
                 </motion.p>

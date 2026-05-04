@@ -27,7 +27,7 @@ export default function Contact() {
               initial={{ y: '100%' }}
               animate={inView ? { y: '0%' } : { y: '100%' }}
               transition={{ duration: 1.1, ease: [0.33, 1, 0.68, 1] }}
-              className="font-poppins font-black text-white leading-none"
+              className="font-cinematic font-black text-white leading-none"
               style={{ fontSize: 'clamp(3rem, 10vw, 9rem)' }}
             >
               Let&apos;s
@@ -39,7 +39,7 @@ export default function Contact() {
               initial={{ y: '100%' }}
               animate={inView ? { y: '0%' } : { y: '100%' }}
               transition={{ delay: 0.1, duration: 1.1, ease: [0.33, 1, 0.68, 1] }}
-              className="font-poppins font-black text-white/30 leading-none"
+              className="font-cinematic font-black text-white/30 leading-none"
               style={{ fontSize: 'clamp(3rem, 10vw, 9rem)' }}
             >
               Work Together
